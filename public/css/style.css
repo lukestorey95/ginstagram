@@ -77,7 +77,7 @@ input[type=text], input[type=password], input[type=email] {
   background: #ddd;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email] {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
   background-color: #04aa6d66;
   outline: none;
 }
