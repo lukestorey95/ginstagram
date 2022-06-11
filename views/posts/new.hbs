@@ -1,7 +1,30 @@
-<form id="new-post-form" action="/posts" method="post">
+<form id="new-post-form" action="/posts" method="post" enctype="multipart/form-data">
   <label for="message">Message: </label>
-  <input id="message" type="text" name="message">
+  <input id="message" type="text" name="message" required>
   <label for="image">Image: </label>
-  <input id="image" type="url" name="image">
+  <input id="image" type="file" name="image">
   <input type="submit" value="Submit">
 </form>
+
+
+{{!-- <h1>Uploaded Images</h1>
+<div>
+  <% items.forEach(function(image) { %>
+  <div>
+    <div>
+      <img src="data:image/<%=image.img.contentType%>;base64,
+        <%=image.img.data.toString('base64')%>">
+      <div>
+        <h5><%= image.name %></h5>
+        
+
+
+<p><%= image.desc %></p>
+
+
+
+      </div>
+    </div>
+  </div>
+  <% }) %>
+</div> --}}
