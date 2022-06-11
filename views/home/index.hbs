@@ -1,16 +1,13 @@
-<h1 class="title">{{title}}</h1>
-<p>Welcome to {{title}}</p>
-
-<div class="buttons">
+<div class="container">
   <form method="get" action="/sessions/new">
-    <button type="submit" class="log-in-button">Login</button> 
+    <label for="login">Already a ginstagram user? Click here:</label>
+    <input type="submit" class="submitbtn" name="login" value="Log In">
   </form>
-  
-  <br>
   <br>
 
   <form method="get" action="/users/new">
-    <button type="submit" class="sign-out-button">Sign-up</button>
+    <label for="signup">Fanatical about gin and want to join? Click here:</label>
+    <input type="submit" class="submitbtn" name="signup" value="Sign Up">
   </form>
 
 </div>

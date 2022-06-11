@@ -1,12 +1,30 @@
 <div class="header">
-  <img class="logo" src="../images/logo.png" height="80" width="80" >
+  <div class="header-left">
+    <a href="/">
+      <img src="../images/logo.png" height="80" width="80">
+    </a>
+
+    <h1>GINSTAGRAM</h1>
+    
+  </div>
+
   <div class="header-right">
-    <a class="active" href="#home">Home</a>
-    <a href="#profile">Profile</a>
-    <a href="#log-out">Log out</a>
-    <form action='/sessions?_method=DELETE' method='POST'>
-      <input type="submit" value="Log Out">
+    <form action="/" method="get">
+      <input class="button" type="submit" value="Home">
     </form>
+    {{#if session}}
+    <form action='/sessions?_method=DELETE' method='POST'>
+      <input class="button" type="submit" value="Log Out">
+    </form>
+    {{else}}
+    <form action='/sessions/new' method='get'>
+      <input class="button" type="submit" value="Log In">
+    </form>
+
+    <form action='/users/new' method='get'>
+      <input class="button" type="submit" value="Sign Up">
+    </form>
+    {{/if}}
   </div>
 </div>
-
+  {{!-- <hr> --}}

@@ -2,29 +2,6 @@
   <label for="message">Message: </label>
   <input id="message" type="text" name="message" required>
   <label for="image">Image: </label>
-  <input id="image" type="file" name="image">
+  <input id="image" type="file" name="image" accept=".png, .jpg, .jpeg, .webp">
   <input type="submit" value="Submit">
 </form>
-
-
-{{!-- <h1>Uploaded Images</h1>
-<div>
-  <% items.forEach(function(image) { %>
-  <div>
-    <div>
-      <img src="data:image/<%=image.img.contentType%>;base64,
-        <%=image.img.data.toString('base64')%>">
-      <div>
-        <h5><%= image.name %></h5>
-        
-
-
-<p><%= image.desc %></p>
-
-
-
-      </div>
-    </div>
-  </div>
-  <% }) %>
-</div> --}}

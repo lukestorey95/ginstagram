@@ -67,3 +67,6 @@ cypress/.DS_Store
 
 # others
 .DS_Store
+atlasKey.js
+
+public/images/uploads

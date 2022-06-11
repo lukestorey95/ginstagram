@@ -13,7 +13,11 @@ const PostsController = {
         }
 
         let reversedPosts = posts.reverse();
-        res.render("posts/index", { posts: reversedPosts });
+        res.render("posts/index", {
+          script: "../js/posts.js",
+          session: req.session.user,
+          posts: reversedPosts,
+        });
       });
   },
 
