@@ -6,20 +6,21 @@ var Like = require("../../models/like");
 describe("Like model", () => {
   beforeEach((done) => {
     mongoose.connection.collections.likes.drop(() => {
+      mockPostId = new mongoose.Types.ObjectId();
+      mockUserId = new mongoose.Types.ObjectId();
+
       done();
     });
   });
 
-  it("has a like", () => {
-    const mockUserId = new mongoose.Types.ObjectId();
-
+  it("contains the post and user ids", () => {
     const like = new Like({
-      post_id: "12345",
-      likes_array: [mockUserId]
+      post_id: mockPostId,
+      user_id: mockUserId,
     });
-  
-    expect(like.likes_array[0]).toEqual(mockUserId);
-    expect(like.post_id).toEqual("12345");
+
+    expect(like.post_id).toEqual(mockPostId);
+    expect(like.user_id).toEqual(mockUserId);
   });
 
   it("can list all likes", (done) => {
@@ -31,11 +32,9 @@ describe("Like model", () => {
   });
 
   it("can save a like", (done) => {
-    const mockUserId = new mongoose.Types.ObjectId();
-
     const like = new Like({
-      post_id: "12345",
-      likes_array: [mockUserId]
+      post_id: mockPostId,
+      user_id: mockUserId,
     });
 
     like.save((err) => {
@@ -44,40 +43,9 @@ describe("Like model", () => {
       Like.find((err, likes) => {
         expect(err).toBeNull();
 
-        expect(like.likes_array[0]).toEqual(mockUserId);
-        expect(likes[0].post_id).toEqual("12345");
+        expect(likes[0].user_id).toEqual(mockUserId);
+        expect(likes[0].post_id).toEqual(mockPostId);
         done();
-      });
-    });
-  });
-
-  it("can add a second like to the post", (done) => {
-    const mockUserId = new mongoose.Types.ObjectId();
-    const anotherMockUserId = new mongoose.Types.ObjectId();
-
-    let like = new Like({
-      post_id: "12345",
-      likes_array: [mockUserId]
-    });
-
-     like.save((err) => {
-      expect(err).toBeNull();
-      
-      const filter = { post_id: '12345' };
-      const update = {$push: {likes_array: [anotherMockUserId]}};
-  
-      Like.findOneAndUpdate(filter, update, {new: true, useFindAndModify: false}, (err, updatedResult) => {
-        expect(err).toBeNull();
-        expect(updatedResult.likes_array[0]).toEqual(mockUserId);
-        expect(updatedResult.likes_array[1]).toEqual(anotherMockUserId);
-
-        Like.find((err, likes) => {
-          expect(err).toBeNull();
-
-          const result = Array.from([...likes[0].likes_array]);
-          expect(result).toEqual([mockUserId, anotherMockUserId]);
-          done();
-        });
       });
     });
   });
