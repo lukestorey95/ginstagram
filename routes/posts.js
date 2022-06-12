@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const path = require("path");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -37,6 +38,8 @@ const PostsController = require("../controllers/posts");
 
 router.get("/", PostsController.Index);
 router.post("/", upload.single("image"), PostsController.Create);
+router.post("/:post_id/likes/:like_id", PostsController.Like);
+router.post("/:post_id/comments/:comment_id", PostsController.Comment);
 router.get("/new", PostsController.New);
 
 module.exports = router;

@@ -1,24 +1,25 @@
-
+{{!-- {{<script src="https://kit.fontawesome.com/2a36eabb22.js" crossorigin="anonymous"></script>}} --}}
 
 <a class="new-post-link" href="/posts/new">New post</a>
 
 <!-- Portfolio Gallery Grid -->
-<div class="row">
+<div class="row posts">
   {{#each posts}}
-  <div class="column">
+  <div class="column post">
     <div class="content">
-      {{#if this.image}}
-        <img src={{this.image}} alt={{this.message}} style="width:100%">
-      {{/if}}
+      <div class="image">
+        {{#if this.image}}
+          <img src={{this.image}} alt={{this.message}} style="width:100%">
+        {{/if}}
+      </div>
       <h3>{{this.user_id.name}}</h3>
       <p>{{this.message}}</p>
 
       <div class="buttons">
-
         <div class="likes">
           <form action="/likes" method="post">
             <input type="hidden" name="post_id" value={{this._id}}>
-            <input class="like-button" type="submit" value="Like: {{this.likes.likes_array.length}}">
+            <input class="like-button" type="submit" value="Like: {{this.likes.length}}">
           </form>
         </div>
 
@@ -29,7 +30,7 @@
       <div style="display: none" class="comments" id={{this._id}} >
         <ul>
         {{#each this.comments}}
-          <li>{{this.comment}}</li>
+          <li>{{this.message}}</li>
         {{/each}}
         </ul>
 
