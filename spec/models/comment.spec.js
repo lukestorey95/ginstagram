@@ -18,10 +18,10 @@ describe("Comment model", () => {
     const comment = new Comment({
       post_id: mockPostId,
       user_id: mockUserId,
-      comment: "a comment",
+      message: "a comment",
     });
 
-    expect(comment.comment).toEqual("a comment");
+    expect(comment.message).toEqual("a comment");
     expect(comment.post_id).toBe(mockPostId);
     expect(comment.user_id).toBe(mockUserId);
   });
@@ -30,7 +30,7 @@ describe("Comment model", () => {
     const comment = new Comment({
       post_id: mockPostId,
       user_id: mockUserId,
-      comment: "another comment",
+      message: "another comment",
     });
 
     comment.save((err) => {
@@ -39,7 +39,7 @@ describe("Comment model", () => {
       Comment.find((err, comments) => {
         expect(err).toBeNull();
 
-        expect(comments[0]).toMatchObject({ comment: "another comment" });
+        expect(comments[0]).toMatchObject({ message: "another comment" });
         expect(comments[0]).toMatchObject({ user_id: mockUserId });
         done();
       });
