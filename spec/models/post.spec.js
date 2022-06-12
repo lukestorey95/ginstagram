@@ -55,7 +55,11 @@ describe("Post model", () => {
 
   it("can save an image post", (done) => {
     const mockUserId = new mongoose.Types.ObjectId();
-    const post = new Post({ image: "https://image.com", user_id: mockUserId });
+    const post = new Post({
+      image: "https://image.com",
+      user_id: mockUserId,
+      message: "test",
+    });
 
     post.save((err) => {
       expect(err).toBeNull();
