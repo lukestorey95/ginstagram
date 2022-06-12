@@ -1,5 +1,5 @@
 describe("Timeline", () => {
-  it("user can comment on posts", () => {
+  it("can submit a post with an image and see the it displayed", () => {
     // sign up
     cy.visit("/users/new");
     cy.get("#email").type("someone@example.com");
@@ -16,17 +16,18 @@ describe("Timeline", () => {
     cy.visit("/posts");
     cy.contains("New post").click();
 
-    cy.get("#new-post-form").find('[type="text"]').type("Hello, world!");
+    cy.get("#new-post-form").find('[type="text"]').type("test image");
+
+    cy.fixture("gin.jpeg").then((fileContent) => {
+      cy.get('input[type="file"]').attachFile({
+        fileContent: fileContent.toString(),
+        fileName: "gin.jpeg",
+        mimeType: "image/jpeg",
+      });
+    });
+
     cy.get("#new-post-form").submit();
 
-    //comment on a post
-    cy.get(".commentsBtn").click();
-    cy.get("#new-comment-form")
-      .find('[type="text"]')
-      .type("yet another comment");
-    cy.get("#new-comment-form").submit();
-
-    //expect
-    cy.get(".comments").first().should("contain", "yet another comment");
+    cy.get('div[class="image"]').find("img").should("be.visible");
   });
 });
